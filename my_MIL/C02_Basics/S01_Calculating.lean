@@ -115,25 +115,23 @@ example : (a + b) * (c + d) = a * c + a * d + b * c + b * d := by
 
 
 example (a b : ℝ) : (a + b) * (a - b) = a ^ 2 - b ^ 2 := by
-  -- rw [add_mul, mul_sub, mul_sub]
-  -- rw [← pow_two a, ← pow_two b]
-  -- rw [mul_comm a b]
-  -- rw [add_sub]
+  -- rw [mul_sub]
+  -- rw [add_mul]
+  -- rw [← add_sub]
+  -- rw [mul_comm (a + b)]
+  -- rw [← mul_sub]
+  -- rw [← sub_sub]
+  -- rw [mul_sub, mul_sub]
+  -- rw [ add_sub]
   -- rw [pow_two, pow_two]
-  rw [mul_sub]
+  -- rw [← add_zero (b * b)]
+  -- rw [← add_zero (a * a)]
+  -- nth_rewrite 1 [add_zero]
+
+  rw [← add_zero a]
+  rw [← add_sub, add_zero]
   rw [add_mul]
-  rw [← add_sub]
-  rw [mul_comm (a + b)]
-  rw [← mul_sub]
-  rw [← sub_sub]
-  rw [mul_sub]
-  rw [pow_two, pow_two]
-  rw [← add_zero (a * a)]
-  rw [← add_sub (a * a)]
-  -- rw [← add_zero (b * b)]
-  -- rw [← sub_sub (a * a)]
-  -- rw [← add_zero (b * b)]
-  -- rw [sub_sub]
+  rw [mul_add, mul_add]
 
 #check pow_two a
 #check mul_sub a b c
