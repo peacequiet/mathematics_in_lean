@@ -97,11 +97,15 @@ example : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b :=
 example : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b :=
   calc
     (a + b) * (a + b) = a * a + b * a + (a * b + b * b) := by
-      sorry
+      rw [← add_mul, ← add_mul, ← mul_add]
     _ = a * a + (b * a + a * b) + b * b := by
-      sorry
+      rw [add_assoc (a * a) (b * a + a * b) (b * b)]
+      rw [add_assoc (b * a) (a * b) (b * b)]
+      rw [add_assoc]
     _ = a * a + 2 * (a * b) + b * b := by
-      sorry
+      rw [two_mul]
+      rw [← add_assoc, ← add_assoc]
+      rw [← add_mul, ← mul_add, mul_comm]
 
 end
 
@@ -115,23 +119,11 @@ example : (a + b) * (c + d) = a * c + a * d + b * c + b * d := by
 
 
 example (a b : ℝ) : (a + b) * (a - b) = a ^ 2 - b ^ 2 := by
-  -- rw [mul_sub]
-  -- rw [add_mul]
-  -- rw [← add_sub]
-  -- rw [mul_comm (a + b)]
-  -- rw [← mul_sub]
-  -- rw [← sub_sub]
-  -- rw [mul_sub, mul_sub]
-  -- rw [ add_sub]
-  -- rw [pow_two, pow_two]
-  -- rw [← add_zero (b * b)]
-  -- rw [← add_zero (a * a)]
-  -- nth_rewrite 1 [add_zero]
-
-  rw [← add_zero a]
-  rw [← add_sub, add_zero]
-  rw [add_mul]
-  rw [mul_add, mul_add]
+  calc
+    (a + b) * (a - b) = a * a + b * a - (a * b + b * b) := by
+      rw [← sub_sub]
+      rw [← add_mul]
+      rw []
 
 #check pow_two a
 #check mul_sub a b c
