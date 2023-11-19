@@ -135,6 +135,10 @@ example : 2 * a * b ≤ a ^ 2 + b ^ 2 := by
   linarith
 
 example : |a * b| ≤ (a ^ 2 + b ^ 2) / 2 := by
-  sorry
+  apply abs_le'.mpr
+  constructor
+  rw [le_div_iff]
+  calc
+
 
 #check abs_le'.mpr

@@ -119,11 +119,10 @@ example : (a + b) * (c + d) = a * c + a * d + b * c + b * d := by
 
 
 example (a b : ℝ) : (a + b) * (a - b) = a ^ 2 - b ^ 2 := by
-  calc
-    (a + b) * (a - b) = a * a + b * a - (a * b + b * b) := by
-      rw [← sub_sub]
-      rw [← add_mul]
-      rw []
+  -- rw [← add_zero a]
+  rw [pow_two, pow_two]
+  rw [← add_zero a, ← add_zero b]
+
 
 #check pow_two a
 #check mul_sub a b c

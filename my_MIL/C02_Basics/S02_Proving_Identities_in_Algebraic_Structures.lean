@@ -155,8 +155,19 @@ theorem mul_right_inv (a : G) : a * a⁻¹ = 1 := by
 theorem mul_one (a : G) : a * 1 = a := by
   rw [← mul_left_inv a, ← mul_assoc, mul_right_inv, one_mul]
 
+theorem const_mul_one (a b: G) : a * b * b⁻¹ = a := by -- my personal theorem
+  rw [mul_assoc]
+  rw [mul_right_inv]
+  rw [mul_one]
+
 theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := by
-  sorry
+  have h : (a * b)⁻¹ * (a * b) = b⁻¹ * a⁻¹ * (a * b) := by
+    rw [mul_assoc, ← mul_assoc a⁻¹, mul_left_inv, mul_left_inv, one_mul, mul_left_inv]
+  rw [← mul_one (a * b)⁻¹]
+  rw [← mul_right_inv]
+  rw [← mul_assoc]
+  rw [h]
+  rw [const_mul_one]
 
 end MyGroup
 
